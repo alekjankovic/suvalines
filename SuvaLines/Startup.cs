@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using SuvaLines.Models;
 
 namespace SuvaLines
 {
@@ -33,6 +35,10 @@ namespace SuvaLines
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var connection = @"Server=WIN-9IHPL51LCPT\SQLEXPRESS,2301;Database=NewsLines;User ID=sa;Password=p@sw0rd;Trusted_Connection=True;ConnectRetryCount=0;Integrated Security=false";
+            services.AddDbContext<NewsLinesContext>(options => options.UseSqlServer(connection));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

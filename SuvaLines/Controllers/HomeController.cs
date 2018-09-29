@@ -8,11 +8,21 @@ using SuvaLines.Models;
 
 namespace SuvaLines.Controllers
 {
+
     public class HomeController : Controller
     {
+        NewsLinesContext _context;
+
+        public HomeController(NewsLinesContext context) {
+
+            _context = context;
+        }
+
+
         public IActionResult Index()
         {
-            return View();
+            List<Articles> model = _context.Articles.ToList();
+            return View(model);
         }
 
         public IActionResult About()
