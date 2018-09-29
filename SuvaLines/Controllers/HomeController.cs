@@ -25,6 +25,20 @@ namespace SuvaLines.Controllers
             return View(model);
         }
 
+        public IActionResult Article(int id)
+        {
+
+            if (id > 0) {
+                Articles model = _context.Articles.FirstOrDefault(x => x.ArticleId == id);
+                return View(model);
+            }
+            return View();
+
+        }
+
+
+
+        /*
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -49,5 +63,6 @@ namespace SuvaLines.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        */
     }
 }

@@ -20,19 +20,13 @@
                             @{
                                 foreach (Articles item in mainSec)
                                 {
-                                    <li id="news_li_">
+                                    <li id="news_li_@item.ArticleId">
                                         <h2>
-                                            <a href="javascript:void(0)"><strong>@item.LongTitle...</strong></a>
+                                            <a href="Home/Article?id=@item.ArticleId"><strong>@item.LongTitle...</strong></a>
                                             <img class="" alt="news_1" src="~/img/news_temp/news_1.jpg" />
                                         </h2>
                                     </li>
-
-
-
                                 }
-
-
-
                             }
 
                         </ul>

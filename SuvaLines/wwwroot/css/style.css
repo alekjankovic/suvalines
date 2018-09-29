@@ -397,6 +397,24 @@ a, a:hover, a:visited, a:link, a:active { text-decoration: none !important; }
 }
 
 
+/*#region Article */
+
+.news-article {
+
+    color:#555;
+
+}
+
+.news-article p {
+    padding:20px 0 50px 0;
+    font-size:16px;
+}
+
+/*#endregion*/
+
+
+
+
 @media only screen and (max-width: 1199px) {
     
     .sec-content { 
