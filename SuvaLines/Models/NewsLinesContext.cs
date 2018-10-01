@@ -24,8 +24,8 @@ namespace SuvaLines.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                //optionsBuilder.UseSqlServer("Data Source=WIN-9IHPL51LCPT\\SQLEXPRESS,2301;Initial Catalog=NewsLines;User ID=sa;Password=p@sw0rd");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=WIN-9IHPL51LCPT\\SQLEXPRESS,2301;Initial Catalog=NewsLines;User ID=sa;Password=p@sw0rd");
             }
         }
 
@@ -39,8 +39,10 @@ namespace SuvaLines.Models
 
                 entity.Property(e => e.DateUpdated).HasColumnType("date");
 
+                entity.Property(e => e.ImgUrl).IsUnicode(false);
+
                 entity.Property(e => e.LongTitle)
-                    .HasMaxLength(50)
+                    .HasMaxLength(128)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Title).HasMaxLength(30);

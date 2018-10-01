@@ -27,42 +27,36 @@ namespace SuvaLines.Controllers
 
         public IActionResult Article(int id)
         {
-
-            if (id > 0) {
+            if (id > 0)
+            {
                 Articles model = _context.Articles.FirstOrDefault(x => x.ArticleId == id);
                 return View(model);
             }
-            return View();
-
+            else {
+                return RedirectToAction("Index");
+            }
+           
         }
 
-
-
-        /*
-        public IActionResult About()
+          
+        public IActionResult SecBlock()
         {
-            ViewData["Message"] = "Your application description page.";
+            List<Articles> model = _context.Articles.ToList();
+            return Json(model);
 
-            return View();
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
 
-            return View();
-        }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        */
+        
+        
     }
 }

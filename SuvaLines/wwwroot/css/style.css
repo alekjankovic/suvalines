@@ -412,7 +412,14 @@ a, a:hover, a:visited, a:link, a:active { text-decoration: none !important; }
 
 /*#endregion*/
 
+/* Crypto Currency*/
+.crypto-currency-news {
+    color:#777;
+    font-size:16px;
+}
 
+
+/* Crypto Currency - END */
 
 
 @media only screen and (max-width: 1199px) {

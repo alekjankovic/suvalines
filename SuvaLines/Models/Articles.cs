@@ -15,6 +15,7 @@ namespace SuvaLines.Models
         public DateTime? DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
         public string LongTitle { get; set; }
+        public string ImgUrl { get; set; }
 
         public Types Group { get; set; }
         public Types Status { get; set; }
