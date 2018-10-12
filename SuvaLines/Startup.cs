@@ -37,12 +37,18 @@ namespace SuvaLines
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //var connection = @"Server=WIN-9IHPL51LCPT\SQLEXPRESS,2301;Database=NewsLines;User ID=sa;Password=p@sw0rd;Trusted_Connection=True;ConnectRetryCount=0;Integrated Security=false";
-            //var connection = @"Server=(localdb)\v11.0;AttachDbFilename=.\DataBase\NewsLines.mdf; Database=NewsLines;Integrated Security=false";
             //services.AddDbContext<NewsLinesContext>(options => options.UseSqlServer(connection));
 
+
+
+            //Replace connection string token
+            var connStr = Configuration.GetConnectionString("DefaultConnection");
+            if (connStr.Contains("%CONTENTROOTPATH%"))
+                connStr = connStr.Replace("%CONTENTROOTPATH%", Environment.CurrentDirectory);
+
+            //Set conection string
             services.AddDbContext<NewsLinesContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(connStr));
 
         }
 
