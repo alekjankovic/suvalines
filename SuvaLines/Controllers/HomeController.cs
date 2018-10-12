@@ -21,7 +21,7 @@ namespace SuvaLines.Controllers
 
         public IActionResult Index()
         {
-            List<Articles> model = _context.Articles.ToList();
+            var model = _context.Articles.ToList();
             return View(model);
         }
 

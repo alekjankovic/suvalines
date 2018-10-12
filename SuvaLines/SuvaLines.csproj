@@ -5,8 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\DataBase\**" />
+    <Content Remove="wwwroot\DataBase\**" />
+    <EmbeddedResource Remove="wwwroot\DataBase\**" />
+    <None Remove="wwwroot\DataBase\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\masterContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Home\About.cshtml" />
     <Content Remove="Views\Home\Privacy.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DataBase\NewsLines.mdf" />
+    <Content Include="DataBase\NewsLines_log.LDF" />
   </ItemGroup>
 
   <ItemGroup>
