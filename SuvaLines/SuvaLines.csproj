@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\DataBase\**" />
+    <Compile Remove="wwwroot\plugins\vue\**" />
     <Content Remove="wwwroot\DataBase\**" />
+    <Content Remove="wwwroot\plugins\vue\**" />
     <EmbeddedResource Remove="wwwroot\DataBase\**" />
+    <EmbeddedResource Remove="wwwroot\plugins\vue\**" />
     <None Remove="wwwroot\DataBase\**" />
+    <None Remove="wwwroot\plugins\vue\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +22,7 @@
   <ItemGroup>
     <Content Remove="Views\Home\About.cshtml" />
     <Content Remove="Views\Home\Privacy.cshtml" />
+    <Content Remove="wwwroot\js\vue-app.js" />
   </ItemGroup>
 
   <ItemGroup>
