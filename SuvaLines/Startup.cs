@@ -42,7 +42,7 @@ namespace SuvaLines
 
 
             //Replace connection string token
-            var connStr = Configuration.GetConnectionString("LocalNew");
+            var connStr = Configuration.GetConnectionString("DefaultConnection");
             if (connStr.Contains("%CONTENTROOTPATH%"))
                 connStr = connStr.Replace("%CONTENTROOTPATH%", Environment.CurrentDirectory);
 
