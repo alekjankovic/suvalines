@@ -1,0 +1,28 @@
+﻿@model Articles
+
+@{
+    ViewData["Title"] = "";
+}
+
+
+<div class="page-main">
+    <div class="main-container">
+        <div class="main-wrap">
+
+            <div class="main-section">
+                <main>
+
+                    <div class="news-article">
+
+                        <h1>@Model.Title</h1>
+                        <p>
+                            @Model.ArticleText
+                        </p>
+
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
