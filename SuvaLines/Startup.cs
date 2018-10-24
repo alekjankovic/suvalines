@@ -42,12 +42,15 @@ namespace SuvaLines
 
 
             //Replace connection string token
-            var connStr = Configuration.GetConnectionString("DefaultConnection");
+            var connStr = Configuration.GetConnectionString("LocalNew");
             if (connStr.Contains("%CONTENTROOTPATH%"))
                 connStr = connStr.Replace("%CONTENTROOTPATH%", Environment.CurrentDirectory);
 
             //Set conection string
-            services.AddDbContext<NewsLinesContext>(options =>
+            //services.AddDbContext<NewsLinesContext>(options =>
+            //    options.UseSqlServer(connStr));
+
+            services.AddDbContext<SuvaLinesLocalContext>(options =>
                 options.UseSqlServer(connStr));
 
         }

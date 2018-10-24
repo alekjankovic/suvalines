@@ -21,7 +21,5 @@ namespace SuvaLines.Models
         public Types Status { get; set; }
         public Users User { get; set; }
         public Types Visible { get; set; }
-
     }
-
 }

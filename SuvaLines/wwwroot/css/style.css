@@ -422,6 +422,50 @@ a, a:hover, a:visited, a:link, a:active { text-decoration: none !important; }
 /* Crypto Currency - END */
 
 
+/* Categories*/
+.category-container {
+    padding:40px;
+    color:#777;
+}
+
+.category-container h1 {
+    font-size:32px;
+}
+
+.category-container ul {
+    list-style:none;
+    padding:10px;
+}
+
+.category-container ul li {
+    display:block;
+}
+
+.category-container ul li a{
+    display:block;
+    height:100px;
+    color:#777;
+}
+
+.category-container ul li img {
+    display:inline-block;
+    width:35%;
+    max-width:200px;  
+    max-height:100px;
+}
+
+.category-container ul li span {
+    display:inline-block;
+    height:100px;
+    width:55%;
+    max-width:400px;
+    overflow:hidden;
+}
+
+/* Categories - END */
+
+
+
 @media only screen and (max-width: 1199px) {
     
     .sec-content { 
