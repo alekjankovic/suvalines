@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SuvaLines.Models;
+using SuvaLines.Models.DisplayModels;
 
 namespace SuvaLines.Controllers
 {
@@ -21,7 +23,17 @@ namespace SuvaLines.Controllers
 
         public IActionResult Index()
         {
-            var model = _context.Articles.ToList();
+            HomePageModel model = new HomePageModel();
+
+            model.Politics = _context.Articles.Where(x => x.GroupId == 10005).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.Business = _context.Articles.Where(x => x.GroupId == 10006).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.World = _context.Articles.Where(x => x.GroupId == 10007).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.Sports = _context.Articles.Where(x => x.GroupId == 10008).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.Teach = _context.Articles.Where(x => x.GroupId == 10009).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.Health = _context.Articles.Where(x => x.GroupId == 10010).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+
+            model.MainSection = _context.Articles.GroupBy(x => x.GroupId).Select(x => x.Last()).ToList();
+
             return View(model);
         }
 

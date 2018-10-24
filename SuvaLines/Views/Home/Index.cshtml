@@ -1,9 +1,6 @@
-﻿@model List<SuvaLines.Models.Articles>
+﻿@model SuvaLines.Models.DisplayModels.HomePageModel;
 
 @{
-    List<Articles> mainSec = Model.Take(5).ToList();
-
-
 
     ViewData["Title"] = "Home Page";
 }
@@ -18,14 +15,22 @@
                     <section class="news-list">
                         <ul>
                             @{
-                                foreach (Articles item in mainSec)
+                                if (Model.MainSection != null)
                                 {
-                                    <li id="news_li_@item.ArticleId">
-                                        <h2>
-                                            <a href="Home/Article?id=@item.ArticleId"><strong>@item.LongTitle...</strong></a>
-                                            <img class="" alt="news_1" src="@item.ImgUrl" />
-                                        </h2>
-                                    </li>
+                                    foreach (Articles item in Model.MainSection)
+                                    {
+                                        <li id="news_li_@item.ArticleId">
+                                            <h2>
+                                                <a href="Home/Article?id=@item.ArticleId"><strong>@item.LongTitle...</strong></a>
+                                                <img class="" alt="news_1" src="@item.ImgUrl" />
+                                            </h2>
+                                        </li>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <li>Error</li>
                                 }
                             }
 
@@ -33,607 +38,81 @@
 
                     </section>
 
-                    <section class="breaking-news-line">
-                        <div class="breaking-news-icon">NEW</div>
-                        <div class="breaking-news-titles">
-                            <a href="javascript:void(0)" title="Lebanese PM says army to carry out operation at Syrian border">Lebanese PM says army to carry out operation at Syrian border</a>
-                            <a href="javascript:void(0)" title="Iran says ambassador to remain in Kuwait despite ro">Iran says ambassador to remain in Kuwait despite row</a>
-                            <a href="javascript:void(0)" title="Turkey withdraws list of German firms suspected of backing terrorism – Berlin">Turkey withdraws list of German firms suspected of backing terrorism – Berlin</a>
-                            <a href="javascript:void(0)" title="Standing NATO Maritime Group 2 ships arrive in Odessa, Ukraine">Standing NATO Maritime Group 2 ships arrive in Odessa, Ukraine</a>
-                            <a href="javascript:void(0)" title="Turkish journalists go on trial accused of waging ‘asymmetric war’">Turkish journalists go on trial accused of waging ‘asymmetric war’</a>
-                            <a href="javascript:void(0)" title="Death toll from Pakistan blast rises to 11 – rescue service">Death toll from Pakistan blast rises to 11 – rescue service</a>
-                            <a href="javascript:void(0)" title="Erdogan meets Qatari counterpart over Gulf dispute">Erdogan meets Qatari counterpart over Gulf dispute</a>
-                            <a href="javascript:void(0)" title="Iran says ambassador to remain in Kuwait despite row">Iran says ambassador to remain in Kuwait despite row</a>
-                        </div>
-                    </section>
-
-                    @*<section class="crypto-currency-news">
-                        <h4>Bitcoin Price Index</h4>
-
-                        <div v-if="cryptoInfo.errored">
-                            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
-                        </div>
-                        <div v-else>
-                            <div v-if="cryptoInfo.loading">Loading...</div>
-                            <div v-else v-for="currency in cryptoInfo.info">
-                                <strong>{{ currency.description }}:</strong>
-                                <span class="lighten">
-                                    <span v-html="currency.symbol"></span>{{ currency.rate_float | currencydecimal }}
-                                </span>
+                    @if (Model.MainSection != null)
+                    {
+                        <section class="breaking-news-line">
+                            <div class="breaking-news-icon">NEW</div>
+                            <div class="breaking-news-titles">
+                                @foreach (Articles item in Model.MainSection)
+                                {
+                                    <a href="Article?id=@item.ArticleId" title="@item.LongTitle">@item.LongTitle</a>
+                                }
                             </div>
-                        </div>
-                    </section>*@
-
-
-
-                    <section class="second-line clearfix">
-
-                        @*<div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line" v-for="item in secLine">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img v-bind:src="item.imgUrl" />
-                                            {{item.title}}
-                                        </a>
-                                    </h4>
-
-                                </div>
-                            </div>
-                        </div>*@
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                    </section>
-
-
-
-                    <section class="second-line clearfix">
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-block">
-                            <div class="sec-block-area">
-                                <span>News</span>
-                            </div>
-
-                            <div class="sec-content">
-                                <div class="sec-line">
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n1.jpg" />
-                                            N. Korea vows ‘merciless blow with nuclear hammer’ if US attempts to topple Kim
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n2.jpg" />
-                                            Attorney General Sessions threatens sanctuary cities with federal grant cuts
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n3.jpg" />
-                                            Humanity at risk as sperm levels among Western men plummet to record low
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n4.jpg" />
-                                            IMF may soon be moving to China – Christine Lagarde
-                                        </a>
-                                    </h4>
-
-                                    <h4>
-                                        <a href="javascript:void(0)" alt="n1">
-                                            <img src="~/img/news_temp/sec_n5.jpg" />
-                                            Israeli police clash with Palestinian protesters in Jerusalem
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-
-                    </section>
+                        </section>
+                    }
+                    
+                        <section class="second-line clearfix">
+
+                            @Html.Partial("_SecBlockHelper", Model.Politics)
+                            
+                            @Html.Partial("_SecBlockHelper", Model.Business)
+                            
+                            @Html.Partial("_SecBlockHelper", Model.World)
+                            
+                            @Html.Partial("_SecBlockHelper", Model.Sports)
+                            
+                            @Html.Partial("_SecBlockHelper", Model.Teach)
+                            
+                            @Html.Partial("_SecBlockHelper", Model.Health)
+                            
+                        </section>
 
                     <section class="stripe-block clearfix">
-                        <div class="stripe-header">Videos</div>
+                                <div class="stripe-header">Videos</div>
 
-                        <div class="stripe-val">
-                            <a class="stripe-content">
-                                <img class="stripe-img" src="~/img/news_temp/stripe_1.jpg" />
-                                <div class="stripe-text">
-                                    <h5>Sanctioning Russia</h5>
-                                    <p>
-                                        The Republican-controlled Congress can’t unite around Trump’s legislative agenda, but with Democrats they are in unison when it comes to punishing Russia for alleged meddling in the 2016 election. Russia will brush off new sanctions as...
-                                    </p>
+                                <div class="stripe-val">
+                                    <a class="stripe-content">
+                                        <img class="stripe-img" src="~/img/news_temp/stripe_1.jpg" />
+                                        <div class="stripe-text">
+                                            <h5>Sanctioning Russia</h5>
+                                            <p>
+                                                The Republican-controlled Congress can’t unite around Trump’s legislative agenda, but with Democrats they are in unison when it comes to punishing Russia for alleged meddling in the 2016 election. Russia will brush off new sanctions as...
+                                            </p>
+                                        </div>
+                                    </a>
+
+                                    <a class="stripe-content">
+                                        <img class="stripe-img" src="~/img/news_temp/stripe_1.jpg" />
+                                        <div class="stripe-text">
+                                            <h5>Sanctioning Russia</h5>
+                                            <p>
+                                                The Republican-controlled Congress can’t unite around Trump’s legislative agenda, but with Democrats they are in unison when it comes to punishing Russia for alleged meddling in the 2016 election. Russia will brush off new sanctions as...
+                                            </p>
+                                        </div>
+                                    </a>
+
+                                    <a class="stripe-content">
+                                        <img class="stripe-img" src="~/img/news_temp/stripe_1.jpg" />
+                                        <div class="stripe-text">
+                                            <h5>Sanctioning Russia</h5>
+                                            <p>
+                                                The Republican-controlled Congress can’t unite around Trump’s legislative agenda, but with Democrats they are in unison when it comes to punishing Russia for alleged meddling in the 2016 election. Russia will brush off new sanctions as...
+                                            </p>
+                                        </div>
+                                    </a>
+
+                                    <a class="stripe-content">
+                                        <img class="stripe-img" src="~/img/news_temp/stripe_1.jpg" />
+                                        <div class="stripe-text">
+                                            <h5>Sanctioning Russia</h5>
+                                            <p>
+                                                The Republican-controlled Congress can’t unite around Trump’s legislative agenda, but with Democrats they are in unison when it comes to punishing Russia for alleged meddling in the 2016 election. Russia will brush off new sanctions as...
+                                            </p>
+                                        </div>
+                                    </a>
+
                                 </div>
-                            </a>
-
-                            <a class="stripe-content">
-                                <img class="stripe-img" src="~/img/news_temp/stripe_1.jpg" />
-                                <div class="stripe-text">
-                                    <h5>Sanctioning Russia</h5>
-                                    <p>
-                                        The Republican-controlled Congress can’t unite around Trump’s legislative agenda, but with Democrats they are in unison when it comes to punishing Russia for alleged meddling in the 2016 election. Russia will brush off new sanctions as...
-                                    </p>
-                                </div>
-                            </a>
-
-                            <a class="stripe-content">
-                                <img class="stripe-img" src="~/img/news_temp/stripe_1.jpg" />
-                                <div class="stripe-text">
-                                    <h5>Sanctioning Russia</h5>
-                                    <p>
-                                        The Republican-controlled Congress can’t unite around Trump’s legislative agenda, but with Democrats they are in unison when it comes to punishing Russia for alleged meddling in the 2016 election. Russia will brush off new sanctions as...
-                                    </p>
-                                </div>
-                            </a>
-
-                            <a class="stripe-content">
-                                <img class="stripe-img" src="~/img/news_temp/stripe_1.jpg" />
-                                <div class="stripe-text">
-                                    <h5>Sanctioning Russia</h5>
-                                    <p>
-                                        The Republican-controlled Congress can’t unite around Trump’s legislative agenda, but with Democrats they are in unison when it comes to punishing Russia for alleged meddling in the 2016 election. Russia will brush off new sanctions as...
-                                    </p>
-                                </div>
-                            </a>
-
-                        </div>
-                    </section>
+                            </section>
 
                 </main>
             </div>
