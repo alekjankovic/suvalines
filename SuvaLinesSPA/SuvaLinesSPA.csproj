@@ -5,14 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\bootstrap\**" />
+    <Compile Remove="wwwroot\font-awesome\**" />
     <Compile Remove="wwwroot\images\**" />
-    <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="wwwroot\bootstrap\**" />
+    <Content Remove="wwwroot\font-awesome\**" />
     <Content Remove="wwwroot\images\**" />
-    <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap\**" />
+    <EmbeddedResource Remove="wwwroot\font-awesome\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
-    <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="wwwroot\bootstrap\**" />
+    <None Remove="wwwroot\font-awesome\**" />
     <None Remove="wwwroot\images\**" />
-    <None Remove="wwwroot\lib\**" />
   </ItemGroup>
 
   <ItemGroup>
