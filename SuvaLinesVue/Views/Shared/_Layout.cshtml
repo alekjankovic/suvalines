@@ -9,14 +9,18 @@
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/dist/site.min.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
 
     @*<partial name="_CookieConsentPartial" />*@
 
-    @RenderBody()
+    <div id="container">
+        <main>
+            @RenderBody()
+        </main>
+    </div>
 
     <environment include="Development">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
