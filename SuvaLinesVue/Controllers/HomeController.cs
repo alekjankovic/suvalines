@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SuvaLinesVue.Models;
+using SuvaLinesVue.Models.HelperModels;
 
 namespace SuvaLinesVue.Controllers
 {
@@ -15,7 +16,7 @@ namespace SuvaLinesVue.Controllers
             return View();
         }
 
-        public IActionResult SubmitedForm([FromBody] FormViewModel form)
+        public IActionResult SubmitedForm()
         {
             string message = "";
             //Insert to database, send email. stc...

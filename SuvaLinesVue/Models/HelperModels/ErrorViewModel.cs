@@ -1,6 +1,6 @@
 using System;
 
-namespace SuvaLinesVue.Models
+namespace SuvaLinesVue.Models.HelperModels
 {
     public class ErrorViewModel
     {

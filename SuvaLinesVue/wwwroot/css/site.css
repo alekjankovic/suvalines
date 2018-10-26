@@ -53,13 +53,13 @@ button:disabled {
 }
 
 .success {
-    background-color: rgb(255, 99, 71);
-    border-color: rgba(255, 99, 71, 10);
+    background-color: $success;
+    border-color: darken($success, 10%);
 }
 
 .danger {
-    background-color:  rgb(255,56,96);
-    border-color: rgba(255,56,96,20);
+    background-color: $danger;
+    border-color: darken($danger, 10%);
 }
 
 #container {
@@ -85,7 +85,7 @@ h1 {
 }
 
 .invalid-input {
-    color: rgb(255,56,96);
+    color: $danger;
     font-size: .7em;
     font-weight: 600;
 }

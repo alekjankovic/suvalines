@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SuvaLinesVue.Models;
 
 namespace SuvaLinesVue
 {
@@ -31,8 +33,19 @@ namespace SuvaLinesVue
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var connStr = Configuration.GetConnectionString("DefaultConnection");
+            if (connStr.Contains("%CONTENTROOTPATH%"))
+            {
+                string currDir = Environment.CurrentDirectory;
+                currDir = currDir.Replace("\\SuvaLinesSPA", "\\SuvaLines");
+                connStr = connStr.Replace("%CONTENTROOTPATH%", currDir);
+            }
+
+            services.AddDbContext<SuvaLinesContext>(options =>
+            options.UseSqlServer(connStr));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
