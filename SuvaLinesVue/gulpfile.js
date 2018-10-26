@@ -1,28 +1,52 @@
-﻿/// <binding BeforeBuild='css:prod, js:prod' ProjectOpened='watch' />
+﻿/// <binding BeforeBuild='sass:prod, sass:dev, js:prod, js:dev' ProjectOpened='watch' />
 'use strict';
 const gulp = require('gulp');
+const sass = require('gulp-sass-glob');
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const rename = require('gulp-rename');
 const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
+const webpack = require('webpack-stream');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
-const webpack = require('webpack-stream');
 
 
 const scriptsPath = 'wwwroot/scripts/*.js';
-const stylesPath = 'wwwroot/css/*.css';
+const stylesPath = 'wwwroot/styles/*.scss';
 
 /**
  * CSS Processing
  * */
 // Production Only
-gulp.task('css:prod', () => {
+gulp.task('sass:prod', () => {
+    const plugins = [
+        autoprefixer({ browsers: ['>0.25%'] }),
+        cssnano
+    ];
     return gulp.src(stylesPath)
-        .pipe(concat('site-all.css'))
-        .pipe(gulp.dest('wwwroot/css/dist'));
+        .pipe(sass())
+        .pipe(postcss(plugins))
+        .pipe(rename('site.min.css'))
+        .pipe(gulp.dest('wwwroot/css'));
 });
 
+//Development Only
+gulp.task('sass:dev', () => {
+    return gulp.src(stylesPath)
+        .pipe(plumber({
+            errorHandler(err) {
+                notify.onError({
+                    title: `Gulp error in ${err.plugin}`,
+                    message: err.toString()
+                })(err);
+            }
+        }))
+        .pipe(sass())
+        .pipe(rename('site.css'))
+        .pipe(gulp.dest('wwwroot/css'));
+});
 
 /**
  * JS Processing
@@ -60,7 +84,7 @@ gulp.task('js:dev', () => {
 
 
 gulp.task('watch', () => {
-    gulp.watch(stylesPath, ['css:dev']);
+    gulp.watch(stylesPath, ['sass:dev']);
     gulp.watch(scriptsPath, ['js:dev']);
 });
 

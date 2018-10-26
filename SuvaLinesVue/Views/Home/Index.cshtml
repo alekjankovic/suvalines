@@ -9,6 +9,7 @@
     <p>
         <label>Email</label>
         <input type="text" placeholder="Enter your email" v-model="Email" />
+        <span class="invalid-input" v-show="InvalidEmail">Invalid Email</span>
     </p>
 
     <p>
@@ -17,7 +18,7 @@
     </p>
 
     <div id="form-buttons">
-        <button type="button" class="danger">Reset Form</button>
-        <button type="button" class="success" ref="SubmitButton">Submit Form</button>
+        <button type="button" class="danger" v-on:click="ResetForm">Reset Form</button>
+        <button type="button" class="success" ref="SubmitButton" v-bind:disabled="isSubmitDisabled" v-on:click="SubmitForm">Submit Form</button>
     </div>
 </div>
