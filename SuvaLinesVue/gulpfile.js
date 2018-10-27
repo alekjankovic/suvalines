@@ -1,33 +1,35 @@
-﻿/// <binding BeforeBuild='sass:prod, sass:dev, js:prod, js:dev' ProjectOpened='watch' />
+﻿/// <binding BeforeBuild='sass:prod, sass:dev, js:prod, js:dev, vue:dev' ProjectOpened='watch' />
 'use strict';
 const gulp = require('gulp');
+
 const sass = require('gulp-sass-glob');
-const postcss = require('gulp-postcss');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
-const rename = require('gulp-rename');
+const cssnano = require('gulp-cssnano');
+
+const vue-loader = require("vue-loader");
+const vueify = require('gulp-vueify2');
 const babel = require('gulp-babel');
-const uglify = require('gulp-uglify');
 const webpack = require('webpack-stream');
+
+const rename = require('gulp-rename');
+
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 
 
-const scriptsPath = 'wwwroot/scripts/*.js';
 const stylesPath = 'wwwroot/styles/*.scss';
+
+const scriptsPath = 'wwwroot/scripts/*.js';
+//const componentsPath = 'wwwroot/scripts/*.vue';
+
 
 /**
  * CSS Processing
  * */
 // Production Only
 gulp.task('sass:prod', () => {
-    const plugins = [
-        autoprefixer({ browsers: ['>0.25%'] }),
-        cssnano
-    ];
     return gulp.src(stylesPath)
         .pipe(sass())
-        .pipe(postcss(plugins))
+        .pipe(cssnano())
         .pipe(rename('site.min.css'))
         .pipe(gulp.dest('wwwroot/css'));
 });
@@ -60,7 +62,6 @@ gulp.task('js:prod', () => {
         .pipe(babel({
             presets: ['@babel/env']
         }))
-        .pipe(uglify())
         .pipe(rename('site.min.js'))
         .pipe(gulp.dest('wwwroot/js'));
 });
@@ -76,11 +77,16 @@ gulp.task('js:dev', () => {
             }
         }))
         .pipe(webpack({
-            mode: 'development'
+            mode: 'development',
+            loader: 'vue-loader'
+        }))
+        .pipe(babel({
+            presets: ['@babel/env']
         }))
         .pipe(rename('site.js'))
         .pipe(gulp.dest('wwwroot/js'));
 });
+
 
 
 gulp.task('watch', () => {
