@@ -5,10 +5,9 @@ const gulp = require('gulp');
 const sass = require('gulp-sass-glob');
 const cssnano = require('gulp-cssnano');
 
-const vue-loader = require("vue-loader");
-const vueify = require('gulp-vueify2');
-const babel = require('gulp-babel');
-const webpack = require('webpack-stream');
+const fs = require("fs");
+const vueify = require("vueify");
+const browserify = require("browserify");
 
 const rename = require('gulp-rename');
 
@@ -17,9 +16,7 @@ const notify = require('gulp-notify');
 
 
 const stylesPath = 'wwwroot/styles/*.scss';
-
-const scriptsPath = 'wwwroot/scripts/*.js';
-//const componentsPath = 'wwwroot/scripts/*.vue';
+const scriptsPath = 'wwwroot/scripts';
 
 
 /**
@@ -53,44 +50,15 @@ gulp.task('sass:dev', () => {
 /**
  * JS Processing
  * */
-// Production Only
-gulp.task('js:prod', () => {
-    gulp.src(scriptsPath)
-        .pipe(webpack({
-            mode: 'production'
-        }))
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(rename('site.min.js'))
-        .pipe(gulp.dest('wwwroot/js'));
+gulp.task("vueify", function () {
+    return browserify('wwwroot/scripts/main.js')
+        .transform(vueify)
+        .bundle()
+        .pipe(fs.createWriteStream("wwwroot/js/site.js"));
 });
-// Development only
-gulp.task('js:dev', () => {
-    gulp.src(scriptsPath)
-        .pipe(plumber({
-            errorHandler(err) {
-                notify.onError({
-                    title: `Gulp error in ${err.plugin}`,
-                    message: err.toString()
-                })(err);
-            }
-        }))
-        .pipe(webpack({
-            mode: 'development',
-            loader: 'vue-loader'
-        }))
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(rename('site.js'))
-        .pipe(gulp.dest('wwwroot/js'));
-});
-
 
 
 gulp.task('watch', () => {
     gulp.watch(stylesPath, ['sass:dev']);
-    gulp.watch(scriptsPath, ['js:dev']);
+    gulp.watch('wwwroot/scripts/**/*.*', ['vueify']);
 });
-

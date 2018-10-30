@@ -1,17 +1,11 @@
-﻿import Vue from 'vue';
-import App from './App.vue';
+﻿var Vue = require('vue');
+var App = require('./app.vue');
 
 new Vue({
-    el: '#vue-app',
-    data: {
-        test: ''
-    },
-    methods: {
-    },
-    computed: {
+    el: '#app',
+    render: function (h) {
+        return h(App);
     }
-
-
-
 });
 
+var a = 0;

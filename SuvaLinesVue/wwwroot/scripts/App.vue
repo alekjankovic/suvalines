@@ -1,19 +1,20 @@
 ﻿<template>
-    <div>
-        <h1>
-            {{title}}
-        </h1>
-        <p>{{greeting()}}</p>
-    </div>
+       <h1>Hello World</h1>
 </template>
 
 <script>
     export default {
-        name: 'app',
-        data() {
-            return {
-                title: 'Hello'
-            }
-        }
+        name: 'App'
     }
 </script>
+
+<!--<style>
+    #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 60px;
+    }
+</style>-->

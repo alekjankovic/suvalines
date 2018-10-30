@@ -6,12 +6,16 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\css\dist\**" />
+    <Compile Remove="wwwroot\js\bundle.js\**" />
     <Compile Remove="wwwroot\lib\**" />
     <Content Remove="wwwroot\css\dist\**" />
+    <Content Remove="wwwroot\js\bundle.js\**" />
     <Content Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="wwwroot\css\dist\**" />
+    <EmbeddedResource Remove="wwwroot\js\bundle.js\**" />
     <EmbeddedResource Remove="wwwroot\lib\**" />
     <None Remove="wwwroot\css\dist\**" />
+    <None Remove="wwwroot\js\bundle.js\**" />
     <None Remove="wwwroot\lib\**" />
   </ItemGroup>
 
@@ -20,17 +24,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="package - Copy.json" />
     <Content Remove="Views\Home\About.cshtml" />
     <Content Remove="Views\Home\Contact.cshtml" />
     <Content Remove="Views\Home\Privacy.cshtml" />
+    <Content Remove="wwwroot\js\bundle.js" />
     <Content Remove="wwwroot\js\site.dev.js" />
+    <Content Remove="wwwroot\scripts\34188231b781d34495ce.js" />
+    <Content Remove="wwwroot\scripts\components\alek.vue" />
     <Content Remove="wwwroot\scripts\utils.jstemp" />
     <Content Remove="wwwroot\styles\site.min.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove=".babelrc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>
