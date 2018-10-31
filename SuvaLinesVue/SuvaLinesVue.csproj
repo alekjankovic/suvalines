@@ -6,15 +6,19 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\css\dist\**" />
+    <Compile Remove="wwwroot\images\**" />
     <Compile Remove="wwwroot\js\bundle.js\**" />
     <Compile Remove="wwwroot\lib\**" />
     <Content Remove="wwwroot\css\dist\**" />
+    <Content Remove="wwwroot\images\**" />
     <Content Remove="wwwroot\js\bundle.js\**" />
     <Content Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="wwwroot\css\dist\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="wwwroot\js\bundle.js\**" />
     <EmbeddedResource Remove="wwwroot\lib\**" />
     <None Remove="wwwroot\css\dist\**" />
+    <None Remove="wwwroot\images\**" />
     <None Remove="wwwroot\js\bundle.js\**" />
     <None Remove="wwwroot\lib\**" />
   </ItemGroup>

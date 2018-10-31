@@ -60,5 +60,7 @@ gulp.task("vueify", function () {
 
 gulp.task('watch', () => {
     gulp.watch(stylesPath, ['sass:dev']);
-    gulp.watch('wwwroot/scripts/**/*.*', ['vueify']);
+    gulp.watch('wwwroot/scripts/main.js' , ['vueify']);
+    gulp.watch('wwwroot/scripts/*.vue', ['vueify']);
+    gulp.watch('wwwroot/scripts/components/*.vue', ['vueify']);
 });

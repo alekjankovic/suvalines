@@ -1,20 +1,30 @@
 ﻿<template>
-       <h1>Hello World</h1>
+
+    <div>
+        <siteheader></siteheader>
+        <maincontainer></maincontainer>
+        <sitefooter></sitefooter>
+
+
+
+
+    </div>
+
 </template>
 
 <script>
+
+    import SiteHeader from './components/SiteHeader.vue'
+    import MainContainer from './components/MainContainer.vue'
+    import SiteFooter from './components/SiteFooter.vue'
+
     export default {
-        name: 'App'
+        name: 'App',
+        components: {
+            'siteheader': SiteHeader,
+            'maincontainer': MainContainer,
+            'sitefooter': SiteFooter
+        }
     }
 </script>
 
-<!--<style>
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
-    }
-</style>-->

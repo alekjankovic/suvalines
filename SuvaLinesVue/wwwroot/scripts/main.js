@@ -3,9 +3,5 @@ var App = require('./app.vue');
 
 new Vue({
     el: '#app',
-    render: function (h) {
-        return h(App);
-    }
+    render: h => h(App)
 });
-
-var a = 0;
