@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SuvaLines.Models.ApiGetModels;
 using SuvaLinesVue.Models;
 using SuvaLinesVue.Models.HelperModels;
 
@@ -11,19 +13,49 @@ namespace SuvaLinesVue.Controllers
 {
     public class HomeController : Controller
     {
+        SuvaLinesContext _context;
+
+        public HomeController(SuvaLinesContext context) {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult SubmitedForm()
-        {
-            string message = "";
-            //Insert to database, send email. stc...
-
-            return Json(new { message = "Email sent."});
-
+        [HttpGet]
+        [Route("api/mainnewslist")]
+        public IActionResult NewsList() {
+            var model = _context.Articles.GroupBy(x => x.GroupId).Select(x => x.Last()).ToList();
+            return Json(model);
         }
+
+        [HttpGet]
+        [Route("api/breakingnews")]
+        public IActionResult BreakingNews()
+        {
+            var model = _context.Articles.GroupBy(x => x.GroupId).Select(x => x.Last()).ToList();
+            return Json(model);
+        }
+
+        [HttpGet]
+        [Route("api/seclines")]
+        public IActionResult SecLines()
+        {
+            HomePageModel model = new HomePageModel();
+
+            model.Politics = _context.Articles.Include(x => x.Group).Where(x => x.GroupId == 10005).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.Business = _context.Articles.Include(x => x.Group).Where(x => x.GroupId == 10006).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.World = _context.Articles.Include(x => x.Group).Where(x => x.GroupId == 10007).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.Sports = _context.Articles.Include(x => x.Group).Where(x => x.GroupId == 10008).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.Teach = _context.Articles.Include(x => x.Group).Where(x => x.GroupId == 10009).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+            model.Health = _context.Articles.Include(x => x.Group).Where(x => x.GroupId == 10010).OrderByDescending(x => x.ArticleId).Take(5).ToList();
+
+            return Json(model);
+        }
+
+
 
 
 

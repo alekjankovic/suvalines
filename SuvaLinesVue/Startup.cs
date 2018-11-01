@@ -34,6 +34,7 @@ namespace SuvaLinesVue
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             var connStr = Configuration.GetConnectionString("DefaultConnection");
             if (connStr.Contains("%CONTENTROOTPATH%"))

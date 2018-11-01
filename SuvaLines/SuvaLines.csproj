@@ -27,6 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\Home\BrakingNews.vue" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="DataBase\NewsLines.mdf" />
     <Content Include="DataBase\NewsLines_log.LDF" />
   </ItemGroup>

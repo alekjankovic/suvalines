@@ -185,7 +185,8 @@ a, a:hover, a:visited, a:link, a:active {
     padding-top: 20px;
 }
 
-.main-section {
+.main-section main {
+    padding-bottom:40px;
 }
 
 /* NEWS LIST */

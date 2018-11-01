@@ -7,11 +7,9 @@
 
                     <div class="main-section">
                         <main>
-
-                            <newslist></newslist>
-                           
-
-
+                            <newslist></newslist>                           
+                            <breakingnews></breakingnews>
+                            <secondlines></secondlines>
                         </main>
                     </div>
 
@@ -28,10 +26,14 @@
 <script>
 
     import NewsList from './NewsList.vue'
+    import BreakingNews from './BreakingNews.vue'
+    import SecondLines from './SecondLines.vue'
 
     export default {
         components: {
-            'newslist': NewsList
+            newslist: NewsList,
+            breakingnews: BreakingNews,
+            secondlines: SecondLines
         },
         methods: {
 
