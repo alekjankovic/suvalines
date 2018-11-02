@@ -22,12 +22,12 @@
                 <nav class="main-navigation">
                     <ul class="main-navigation-list clearfix">
                         <li><a href="/"><strong>Home</strong></a></li>
-                        <li><a href="Category?id=10007"><strong>World</strong></a></li>
-                        <li><a href="Category?id=10005"><strong>Politics</strong></a></li>
-                        <li><a href="Category?id=10006"><strong>Business</strong></a></li>
-                        <li><a href="Category?id=10008"><strong>Sports</strong></a></li>
-                        <li><a href="Category?id=10009"><strong>Tech</strong></a></li>
-                        <li><a href="Category?id=10010"><strong>Health</strong></a></li>
+                        <li><a href="/category"><strong>World</strong></a></li><!--"/category?id=10007"-->
+                        <li><a href="/category?id=10005"><strong>Politics</strong></a></li>
+                        <li><a href="/category?id=10006"><strong>Business</strong></a></li>
+                        <li><a href="/category?id=10008"><strong>Sports</strong></a></li>
+                        <li><a href="/category?id=10009"><strong>Tech</strong></a></li>
+                        <li><a href="/category?id=10010"><strong>Health</strong></a></li>
                     </ul>
                 </nav>
             </div>
