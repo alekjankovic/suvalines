@@ -2,7 +2,7 @@
     <section class="breaking-news-line">
         <div class="breaking-news-icon">NEW</div>
         <div class="breaking-news-titles">
-            <a  v-for="item in breakingNews" v-bind:href="'Article?id=' + item.articleId" v-bind:title="item.LongTitle">{{item.longTitle}}</a>           
+            <router-link  v-for="item in breakingNews" v-bind:to="'/article/' + item.articleId" v-bind:title="item.LongTitle" exact>{{item.longTitle}}</router-link>           
         </div>
     </section>
 </template>

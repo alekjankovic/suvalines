@@ -7,10 +7,10 @@
             <div class="sec-content">
                 <div class="sec-line">
                     <h4 v-for="item in value">
-                        <a v-bind:href="'Article?id=' + item.AaticleId">
+                        <router-link v-bind:to="'/article/' + item.AaticleId" exact>
                             <img v-bind:src="item.imgUrl" />
                             <span>{{item.title}}</span>
-                        </a>
+                        </router-link>
                     </h4>
                 </div>
             </div>

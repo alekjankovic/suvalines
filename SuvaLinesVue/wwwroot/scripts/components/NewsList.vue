@@ -3,7 +3,7 @@
         <ul>
             <li v-for="item in newsList" v-bind:id="'news_li_' + item.articleId">
                 <h2>
-                    <a v-bind:href="'Article?id=' + item.articleId"><strong>{{item.longTitle}}...</strong></a>
+                    <router-link v-bind:to="'/article/' + item.articleId" exact><strong>{{item.longTitle}}...</strong></router-link>
                     <img class="" alt="news_1" v-bind:src="item.imgUrl" />
                 </h2>
             </li>

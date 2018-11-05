@@ -29,6 +29,8 @@
 
     import MainContainer from './components/MainContainer.vue'
     import Category from './components/Category.vue'
+    import Article from './components/Article.vue'
+    import Search from './components/Search.vue'
 
 
     export default {
@@ -37,7 +39,9 @@
             'siteheader': SiteHeader,
             'sitefooter': SiteFooter,
             'maincontainer': MainContainer,
-            'category': Category
+            'category': Category,
+            'app-article': Article,
+            'app-search': Search
         }
     }
 </script>

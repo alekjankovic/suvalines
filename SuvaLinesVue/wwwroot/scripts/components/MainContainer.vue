@@ -1,23 +1,9 @@
 ﻿<template>
 
-    <div id="main-app">
-        <div class="page-main">
-            <div class="main-container">
-                <div class="main-wrap">
-
-                    <div class="main-section">
-                        <main>
-                            <newslist></newslist>                           
-                            <breakingnews></breakingnews>
-                            <secondlines></secondlines>
-                        </main>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
+    <div>
+        <newslist></newslist>
+        <breakingnews></breakingnews>
+        <secondlines></secondlines>
     </div>
 
 </template>

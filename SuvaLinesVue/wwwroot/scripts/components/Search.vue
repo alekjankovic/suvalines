@@ -1,9 +1,10 @@
 ﻿<template>
 
     <div class="category-container">
+        <h1>Search results for: "{{qSearch}}"</h1>
 
         <ul>
-            <li v-for="item in catnews" style="display:block;">
+            <li v-for="item in searchList" style="display:block;">
                 <h2>
                     <router-link v-bind:to="'/article/' + item.articleId" exact>
                         <img v-bind:src="item.imgUrl" v-bind:alt="item.Title" />
@@ -22,19 +23,19 @@
     export default {
         data() {
             return {
-                id: this.$route.params.id,
-                catnews: {}
+                qSearch: this.$route.query.qstr,
+                searchList: {}
             }
         },
         mounted() {
-            this.getNewsByCategory(this.id);
+            this.getSearch();
         },
         methods: {
-            getNewsByCategory(artId) {
+            getSearch() {
                 this.axios
-                    .get('/api/category?id=' + artId)
+                    .get('/api/search?qsearch=' + this.qSearch)
                     .then(response => {
-                        this.catnews = response.data;
+                        this.searchList = response.data;
                     })
                     .catch(error => {
                         console.log(error);

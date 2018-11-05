@@ -19,6 +19,10 @@ namespace SuvaLinesVue.Controllers
             _context = context;
         }
 
+        [Route("")]
+        [Route("Category/{id}")]
+        [Route("Article/{id}")]
+        /*Still need to figure out why is this working in Vue*/
         public IActionResult Index()
         {
             return View();
@@ -55,7 +59,35 @@ namespace SuvaLinesVue.Controllers
             return Json(model);
         }
 
+        [HttpGet]
+        [Route("api/category")]
+        public IActionResult Category(int id)
+        {
 
+            List<Articles> model = _context.Articles.Include(x => x.Group).Where(x => x.GroupId == id).OrderByDescending(x => x.ArticleId).ToList();
+            return Json(model);
+        }
+
+        [HttpGet]
+        [Route("api/article")]
+        public IActionResult Article(int id)
+        {
+            Articles model = _context.Articles.FirstOrDefault(x => x.ArticleId == id);
+            return Json(model);
+        }
+
+        [HttpGet]
+        [Route("api/search")]
+        public IActionResult Search(string qSearch) {
+
+            List<Articles> model = new List<Articles>();
+
+            if (!string.IsNullOrEmpty(qSearch)) {
+                model = _context.Articles.Where(x => x.Title.Contains(qSearch) || x.LongTitle.Contains(qSearch) || x.ArticleText.Contains(qSearch)).ToList();
+            }  
+            return Json(model);
+
+        }
 
 
 
