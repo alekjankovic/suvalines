@@ -23,7 +23,6 @@ namespace SuvaLinesVue.Controllers
         [Route("Category/{id}")]
         [Route("Article/{id}")]
         [Route("Search")]
-        /*Still need to figure out why those routes are working in Vue if you paste them directly in browser*/
         public IActionResult Index()
         {
             return View();

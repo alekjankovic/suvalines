@@ -18,6 +18,7 @@
   <ItemGroup>
     <Compile Remove="Controllers\CategoryController.cs" />
     <Compile Remove="Models\masterContext.cs" />
+    <Compile Remove="Models\NewsLinesContext.cs" />
   </ItemGroup>
 
   <ItemGroup>

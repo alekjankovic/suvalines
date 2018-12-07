@@ -7,6 +7,27 @@
            {{article.articleText}}
         </p>
 
+        <div>
+            <div>Comments</div>
+
+            <div class="comment-list-cont">
+
+                <div class="comment-cont">
+                    <div>Alek</div>
+                    <p>
+
+                    </p>
+
+
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+               
     </div>
 
 </template>
