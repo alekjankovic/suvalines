@@ -40,7 +40,7 @@ namespace SuvaLinesVue
             if (connStr.Contains("%CONTENTROOTPATH%"))
             {
                 string currDir = Environment.CurrentDirectory;
-                currDir = currDir.Replace("\\SuvaLinesVue", "\\SuvaLines");
+                //currDir = currDir.Replace("\\SuvaLinesVue", "\\SuvaLines");
                 connStr = connStr.Replace("%CONTENTROOTPATH%", currDir);
             }
 
