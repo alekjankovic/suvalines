@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SuvaLines.Models.ApiGetModels;
 using SuvaLinesVue.Models;
+using SuvaLinesVue.Models.EditModels;
 using SuvaLinesVue.Models.HelperModels;
 
 namespace SuvaLinesVue.Controllers
@@ -72,7 +75,7 @@ namespace SuvaLinesVue.Controllers
         [Route("api/article")]
         public IActionResult Article(int id)
         {
-            Articles model = _context.Articles.FirstOrDefault(x => x.ArticleId == id);
+            Articles model = _context.Articles.Include(x=> x.Comments).FirstOrDefault(x => x.ArticleId == id) ;
             return Json(model);
         }
 
@@ -89,6 +92,30 @@ namespace SuvaLinesVue.Controllers
 
         }
 
+        [HttpPost]
+        [Route("api/postarticle")]
+        public HttpResponseMessage PostComment(Comments dataToPost)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+
+            try
+            {
+                _context.Comments.Add(dataToPost);
+                var result = _context.SaveChanges();
+            }
+            catch (Exception ex) {
+             
+            }
+
+            //var model = new CommentEditModel(dataToPost);
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            return response;
+
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

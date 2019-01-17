@@ -49,7 +49,6 @@
             getSearch() {
                 var qstr = this.qSearch;
                 if (qstr != "") {
-                    debugger;
                     this.$router.push({
                         path: '/search',
                         query: {

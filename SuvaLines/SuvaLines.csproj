@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\ApiController.cs" />
     <Compile Remove="Controllers\CategoryController.cs" />
     <Compile Remove="Models\masterContext.cs" />
     <Compile Remove="Models\NewsLinesContext.cs" />

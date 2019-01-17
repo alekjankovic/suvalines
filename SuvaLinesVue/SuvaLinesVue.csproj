@@ -24,6 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\DefaultController.cs" />
+    <Compile Remove="Controllers\UniApiController.cs" />
     <Compile Remove="Models\FormViewModel.cs" />
   </ItemGroup>
 
@@ -42,11 +44,19 @@
 
   <ItemGroup>
     <None Remove=".babelrc" />
+    <None Remove="DataBase\NewsLines.mdf" />
+    <None Remove="DataBase\NewsLines_log.LDF" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DataBase\NewsLines.mdf" />
+    <Content Include="DataBase\NewsLines_log.LDF" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>

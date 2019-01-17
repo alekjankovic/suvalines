@@ -5,6 +5,11 @@ namespace SuvaLinesVue.Models
 {
     public partial class Articles
     {
+        public Articles()
+        {
+            Comments = new HashSet<Comments>();
+        }
+
         public int ArticleId { get; set; }
         public int? UserId { get; set; }
         public string Title { get; set; }
@@ -21,5 +26,6 @@ namespace SuvaLinesVue.Models
         public Types Status { get; set; }
         public Users User { get; set; }
         public Types Visible { get; set; }
+        public ICollection<Comments> Comments { get; set; }
     }
 }

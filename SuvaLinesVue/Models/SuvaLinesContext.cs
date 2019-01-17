@@ -16,6 +16,7 @@ namespace SuvaLinesVue.Models
         }
 
         public virtual DbSet<Articles> Articles { get; set; }
+        public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<Profiles> Profiles { get; set; }
         public virtual DbSet<Types> Types { get; set; }
         public virtual DbSet<Users> Users { get; set; }
@@ -64,6 +65,27 @@ namespace SuvaLinesVue.Models
                     .WithMany(p => p.ArticlesVisible)
                     .HasForeignKey(d => d.VisibleId)
                     .HasConstraintName("Articles_VisibleId_FK");
+            });
+
+            modelBuilder.Entity<Comments>(entity =>
+            {
+                entity.HasKey(e => e.CommentId);
+
+                entity.Property(e => e.CommentText)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Article)
+                    .WithMany(p => p.Comments)
+                    .HasForeignKey(d => d.ArticleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_Comments_Articles");
             });
 
             modelBuilder.Entity<Profiles>(entity =>

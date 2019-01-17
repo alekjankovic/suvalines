@@ -12678,7 +12678,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-240c1c04", __vue__options__)
   } else {
-    hotAPI.reload("data-v-240c1c04", __vue__options__)
+    hotAPI.rerender("data-v-240c1c04", __vue__options__)
   }
 })()}
 },{"./components/Article.vue":33,"./components/Category.vue":35,"./components/MainContainer.vue":36,"./components/Search.vue":38,"./components/SiteFooter.vue":40,"./components/SiteHeader.vue":41,"vue":31,"vue-hot-reload-api":29}],33:[function(require,module,exports){
@@ -12704,9 +12704,26 @@ exports.default = {
             var _this = this;
 
             this.axios.get('/api/article?id=' + artId).then(function (response) {
+                console.log(response);
                 _this.article = response.data;
             }).catch(function (error) {
                 console.log(error);
+            });
+        },
+        postComment: function postComment(e) {
+            var postData = {
+                ArticleId: this.article.articleId,
+                Username: e.target.elements.user.value,
+                CommentText: e.target.elements.comment.value
+            };
+            this.axios({
+                url: '/api/postarticle',
+                method: 'post',
+                params: postData
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (response) {
+                console.log(response);
             });
         }
     }
@@ -12715,7 +12732,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"news-article"},[_c('h1',[_vm._v(_vm._s(_vm.article.title))]),_vm._v(" "),_c('p',[_vm._v("\n       "+_vm._s(_vm.article.articleText)+"\n    ")])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"news-article",attrs:{"data-id":_vm.article.articleId}},[_c('h1',[_vm._v(_vm._s(_vm.article.title))]),_vm._v(" "),_c('p',[_vm._v("\n       "+_vm._s(_vm.article.articleText)+"\n    ")]),_vm._v(" "),_c('div',{staticClass:"comments-area"},[_c('div',{staticClass:"comments-header"},[_vm._v("Post a comment")]),_vm._v(" "),_c('form',{staticClass:"comments-form",on:{"submit":function($event){$event.preventDefault();_vm.postComment($event)}}},[_c('input',{staticClass:"comment-user",attrs:{"type":"text","name":"user"}}),_vm._v(" "),_c('textarea',{staticClass:"comment-text",attrs:{"name":"comment"}}),_vm._v(" "),_c('button',{staticClass:"comment-submit",attrs:{"type":"submit"}},[_vm._v("Post")])]),_vm._v(" "),_c('div',{staticClass:"comments-header"},[_vm._v("Comments")]),_vm._v(" "),_c('div',{staticClass:"comment-list-cont"},_vm._l((_vm.article.comments),function(item){return _c('div',{staticClass:"comment-cont"},[_c('div',[_vm._v(_vm._s(item.username))]),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(item.commentText)+"  ")])])}))])])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -12769,7 +12786,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-705d0e0e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-705d0e0e", __vue__options__)
+    hotAPI.rerender("data-v-705d0e0e", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29}],35:[function(require,module,exports){
@@ -12815,7 +12832,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-639baf81", __vue__options__)
   } else {
-    hotAPI.reload("data-v-639baf81", __vue__options__)
+    hotAPI.rerender("data-v-639baf81", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29}],36:[function(require,module,exports){
@@ -12862,7 +12879,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-df5cfd56", __vue__options__)
   } else {
-    hotAPI.reload("data-v-df5cfd56", __vue__options__)
+    hotAPI.rerender("data-v-df5cfd56", __vue__options__)
   }
 })()}
 },{"./BreakingNews.vue":34,"./NewsList.vue":37,"./SecondLines.vue":39,"vue":31,"vue-hot-reload-api":29}],37:[function(require,module,exports){
@@ -12907,7 +12924,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-589781d8", __vue__options__)
   } else {
-    hotAPI.reload("data-v-589781d8", __vue__options__)
+    hotAPI.rerender("data-v-589781d8", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29}],38:[function(require,module,exports){
@@ -12919,7 +12936,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
     data: function data() {
-        debugger;
         return {
             qSearch: this.$route.query.qstr,
             searchList: {}
@@ -12933,9 +12949,7 @@ exports.default = {
         getSearch: function getSearch() {
             var _this = this;
 
-            debugger;
             this.axios.get('/api/search?qsearch=' + this.qSearch).then(function (response) {
-                debugger;
                 _this.searchList = response.data;
             }).catch(function (error) {
                 console.log(error);
@@ -12956,7 +12970,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-90e09c2a", __vue__options__)
   } else {
-    hotAPI.reload("data-v-90e09c2a", __vue__options__)
+    hotAPI.rerender("data-v-90e09c2a", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29}],39:[function(require,module,exports){
@@ -13001,7 +13015,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-4cee2d38", __vue__options__)
   } else {
-    hotAPI.reload("data-v-4cee2d38", __vue__options__)
+    hotAPI.rerender("data-v-4cee2d38", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29}],40:[function(require,module,exports){
@@ -13025,7 +13039,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-1d4a9185", __vue__options__)
   } else {
-    hotAPI.reload("data-v-1d4a9185", __vue__options__)
+    hotAPI.rerender("data-v-1d4a9185", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29}],41:[function(require,module,exports){
@@ -13045,7 +13059,6 @@ exports.default = {
         getSearch: function getSearch() {
             var qstr = this.qSearch;
             if (qstr != "") {
-                debugger;
                 this.$router.push({
                     path: '/search',
                     query: {
@@ -13070,7 +13083,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-3e7cf577", __vue__options__)
   } else {
-    hotAPI.reload("data-v-3e7cf577", __vue__options__)
+    hotAPI.rerender("data-v-3e7cf577", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29}],42:[function(require,module,exports){
