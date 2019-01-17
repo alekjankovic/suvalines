@@ -11,8 +11,8 @@
             <div class="comments-header">Post a comment</div>
 
             <form v-on:submit.prevent="postComment($event)" class="comments-form">
-                <input class="comment-user" type="text" name="user" />
-                <textarea class="comment-text" name="comment"></textarea>
+                <input v-model="postData.Username" class="comment-user" type="text" name="user" />
+                <textarea v-model="postData.CommentText" class="comment-text" name="comment"></textarea>
                 <button class="comment-submit" type="submit">Post</button>
             </form>
 
@@ -37,16 +37,21 @@
         data() {
             return {
                 id: this.$route.params.id,
-                article: {}
+                article: {},
+                postData: {
+                    Username: "",
+                    CommentText: ""
+                }
             }
         },
         mounted() {
-            this.getArticle(this.id);
+            this.getArticle();
         },
         methods: {
-            getArticle(artId) {
+            getArticle() {
+                debugger;
                 this.axios
-                    .get('/api/article?id=' + artId)
+                    .get('/api/article?id=' + this.id)
                     .then(response => {
                         console.log(response);
                         this.article = response.data;
@@ -56,16 +61,16 @@
                     });
             },
             postComment(e) {
-                let postData = {
-                    ArticleId: this.article.articleId,
-                    Username: e.target.elements.user.value,
-                    CommentText: e.target.elements.comment.value,
-                };
+                this.postData.ArticleId = this.article.articleId;
+
                 this.axios({
                     url: '/api/postarticle',
                     method: 'post',
-                    params: postData
-                }).then(function (response) {
+                    params: this.postData
+                }).then((response) => {
+                    debugger;
+                    this.getArticle();
+                    this.postData = {};
                     console.log(response);
                     }
                 ).catch(function (response) {
