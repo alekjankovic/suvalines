@@ -105,15 +105,13 @@ namespace SuvaLinesVue.Controllers
             {
                 _context.Comments.Add(dataToPost);
                 var result = _context.SaveChanges();
+                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+                return response;
             }
             catch (Exception ex) {
-             
+                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return response;
             }
-
-            //var model = new CommentEditModel(dataToPost);
-
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            return response;
 
         }
 

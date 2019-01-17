@@ -49,7 +49,6 @@
         },
         methods: {
             getArticle() {
-                debugger;
                 this.axios
                     .get('/api/article?id=' + this.id)
                     .then(response => {
@@ -68,7 +67,6 @@
                     method: 'post',
                     params: this.postData
                 }).then((response) => {
-                    debugger;
                     this.getArticle();
                     this.postData = {};
                     console.log(response);
