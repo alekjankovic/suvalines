@@ -12707,7 +12707,6 @@ exports.default = {
         getArticle: function getArticle() {
             var _this = this;
 
-            debugger;
             this.axios.get('/api/article?id=' + this.id).then(function (response) {
                 console.log(response);
                 _this.article = response.data;
@@ -12725,7 +12724,6 @@ exports.default = {
                 method: 'post',
                 params: this.postData
             }).then(function (response) {
-                debugger;
                 _this2.getArticle();
                 _this2.postData = {};
                 console.log(response);
