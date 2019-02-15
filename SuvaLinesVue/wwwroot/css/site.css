@@ -32,7 +32,7 @@ body {
     margin: 0px;
     font-family: "Source Sans Pro", sans-serif !important;
     outline: none;
-    color: #FFF;
+    color: #777;
     background-color: #eaeaea;
 }
 
@@ -512,10 +512,12 @@ a, a:hover, a:visited, a:link, a:active {
 }
 
 .category-container ul li img {
-    display: inline-block;
+    display: block;
+    float:left;
     width: 35%;
     max-width: 200px;
     max-height: 100px;
+    margin-right:10px;
 }
 
 .category-container ul li span {
@@ -524,6 +526,7 @@ a, a:hover, a:visited, a:link, a:active {
     width: 55%;
     max-width: 400px;
     overflow: hidden;
+    font-size:20px;
 }
 
 /* Categories - END */
@@ -584,6 +587,7 @@ a, a:hover, a:visited, a:link, a:active {
 
 }
 /* Comment Area - END*/
+
 @media only screen and (max-width: 1199px) {
 
     .sec-content {

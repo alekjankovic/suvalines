@@ -31,6 +31,7 @@
     import Category from './components/Category.vue'
     import Article from './components/Article.vue'
     import Search from './components/Search.vue'
+    import AddNews from './components/AddNews.vue'
 
 
     export default {
@@ -41,7 +42,8 @@
             'maincontainer': MainContainer,
             'category': Category,
             'app-article': Article,
-            'app-search': Search
+            'app-search': Search,
+            'addnews':AddNews
         }
     }
 </script>

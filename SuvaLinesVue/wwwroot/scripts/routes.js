@@ -15,5 +15,10 @@ module.exports = [
     {
         path: '/search',
         component: require('./components/Search.vue')
+    },
+    {
+        path: '/addnews',
+        component: require('./components/AddNews.vue')
     }
+
 ];

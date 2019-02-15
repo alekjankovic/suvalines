@@ -26,6 +26,8 @@
   <ItemGroup>
     <Compile Remove="Controllers\DefaultController.cs" />
     <Compile Remove="Controllers\UniApiController.cs" />
+    <Compile Remove="Models\EditModels\CommentEditModel.cs" />
+    <Compile Remove="Models\EditModels\SuvaEditModel.cs" />
     <Compile Remove="Models\FormViewModel.cs" />
   </ItemGroup>
 

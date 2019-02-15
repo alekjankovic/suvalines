@@ -63,7 +63,7 @@
                 this.postData.ArticleId = this.article.articleId;
 
                 this.axios({
-                    url: '/api/postarticle',
+                    url: '/api/postcomment',
                     method: 'post',
                     params: this.postData
                 }).then((response) => {

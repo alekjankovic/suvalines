@@ -28,6 +28,7 @@
                         <li><router-link to="/category/10008" exact><strong>Sports</strong></router-link></li>
                         <li><router-link to="/category/10009" exact><strong>Tech</strong></router-link></li>
                         <li><router-link to="/category/10010" exact><strong>Health</strong></router-link></li>
+                        <li><router-link to="/addnews" exact><strong>AddNews</strong></router-link></li>
                     </ul>
                 </nav>
             </div>

@@ -31,6 +31,7 @@
         },
         methods: {
             getNewsByCategory(artId) {
+                console.log("Reload");
                 this.axios
                     .get('/api/category?id=' + artId)
                     .then(response => {

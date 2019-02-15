@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SuvaLines.Models.ApiGetModels;
 using SuvaLinesVue.Models;
 using SuvaLinesVue.Models.EditModels;
@@ -26,6 +29,7 @@ namespace SuvaLinesVue.Controllers
         [Route("Category/{id}")]
         [Route("Article/{id}")]
         [Route("Search")]
+        [Route("AddNews")]
         public IActionResult Index()
         {
             return View();
@@ -93,7 +97,7 @@ namespace SuvaLinesVue.Controllers
         }
 
         [HttpPost]
-        [Route("api/postarticle")]
+        [Route("api/postcomment")]
         public HttpResponseMessage PostComment(Comments dataToPost)
         {
             if (!ModelState.IsValid)
@@ -113,6 +117,58 @@ namespace SuvaLinesVue.Controllers
                 return response;
             }
 
+        }
+
+        [HttpPost]
+        [Route("api/uploadimg")]
+        public async Task<ActionResult> UploadImg(IFormFile image)
+        {
+            JsonResult result;
+
+            if (image != null) {
+                long size = image.Length;
+                string newfilename = DateTime.Now.ToString("yyyy-MM-dd-") + image.FileName;
+
+                var filePath = Environment.CurrentDirectory + "\\wwwroot\\img\\news_temp\\" + newfilename;
+                
+                try {
+                    Stream fileContent = image.OpenReadStream();
+                    using (var stream = new FileStream(filePath, FileMode.Create)) {
+                        await image.CopyToAsync(stream);
+                    }
+                    newfilename = "/img/news_temp/" + newfilename;
+                    result = new JsonResult(new { url = newfilename });
+                    result.StatusCode = 200;
+                    return Ok(result);
+                } catch (Exception ex) {
+                    result = new JsonResult(new { Message = "Error" });
+                    result.StatusCode = 500;
+                    return result;
+                }         
+            }
+            result = new JsonResult(new { Message = "Error" });
+            result.StatusCode = 500;
+            return result;
+        }
+
+        [HttpPost]
+        [Route("api/postarticle")]
+        public HttpResponseMessage PostArticle(PostArticleModel dataToPost)
+        {
+            ArticleEditModel model = new ArticleEditModel(_context, dataToPost);
+            model.AddNew();
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            return response;
+        }
+
+
+        [HttpGet]
+        [Route("api/types")]
+        public IActionResult Types(int groupid)
+        {
+            List<Types> model = _context.Types.Where(x => x.GroupId == groupid).ToList();
+            return Json(model);
         }
 
 
