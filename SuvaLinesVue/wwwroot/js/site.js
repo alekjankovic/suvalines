@@ -12905,7 +12905,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 })()}
 },{"vue":31,"vue-hot-reload-api":29}],36:[function(require,module,exports){
 ;(function(){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -12917,16 +12917,24 @@ exports.default = {
             catnews: {}
         };
     },
+
+    watch: {
+        '$route': function $route(to, from) {
+            debugger;
+            this.id = to.params.id;
+            this.getNewsByCategory();
+        }
+    },
     mounted: function mounted() {
-        this.getNewsByCategory(this.id);
+        this.getNewsByCategory();
     },
 
     methods: {
-        getNewsByCategory: function getNewsByCategory(artId) {
+        getNewsByCategory: function getNewsByCategory() {
             var _this = this;
 
             console.log("Reload");
-            this.axios.get('/api/category?id=' + artId).then(function (response) {
+            this.axios.get('/api/category?id=' + this.id).then(function (response) {
                 _this.catnews = response.data;
             }).catch(function (error) {
                 console.log(error);
@@ -12938,7 +12946,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"category-container"},[_c('ul',_vm._l((_vm.catnews),function(item){return _c('li',{staticStyle:{"display":"block"}},[_c('h2',[_c('router-link',{attrs:{"to":'/article/' + item.articleId,"exact":""}},[_c('img',{attrs:{"src":item.imgUrl,"alt":item.Title}}),_vm._v(" "),_c('span',[_vm._v(_vm._s(item.longTitle))])])],1)])}))])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"category-container"},[_c('h1',[_vm._v(_vm._s(_vm.id))]),_vm._v(" "),_c('ul',_vm._l((_vm.catnews),function(item){return _c('li',{staticStyle:{"display":"block"}},[_c('h2',[_c('router-link',{attrs:{"to":'/article/' + item.articleId,"exact":""}},[_c('img',{attrs:{"src":item.imgUrl,"alt":item.Title}}),_vm._v(" "),_c('span',[_vm._v(_vm._s(item.longTitle))])])],1)])}))])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

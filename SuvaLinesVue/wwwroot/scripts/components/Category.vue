@@ -1,6 +1,7 @@
 ﻿<template>
 
     <div class="category-container">
+        <h1>{{id}}</h1>
 
         <ul>
             <li v-for="item in catnews" style="display:block;">
@@ -26,14 +27,21 @@
                 catnews: {}
             }
         },
+        watch: {
+            '$route'(to, from) {
+                debugger;
+                this.id = to.params.id;
+                this.getNewsByCategory();
+            }
+        },
         mounted() {
-            this.getNewsByCategory(this.id);
+            this.getNewsByCategory();
         },
         methods: {
-            getNewsByCategory(artId) {
+            getNewsByCategory() {
                 console.log("Reload");
                 this.axios
-                    .get('/api/category?id=' + artId)
+                    .get('/api/category?id=' + this.id)
                     .then(response => {
                         this.catnews = response.data;
                     })
